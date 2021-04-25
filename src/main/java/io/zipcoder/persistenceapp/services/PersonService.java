@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import sun.awt.PeerEvent;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PersonService {
@@ -95,6 +93,29 @@ public class PersonService {
     }
 
     //    Generate a map of surnames to lists of people with that surname
-    //    Generate a map of first names to the number of times they occur.
+    public Map<String,List<Person>> getLastNameMap(){
+        HashMap<String, List<Person>> lastNameMap = new HashMap<>();
+        for(Person p : repository.findAll()){
+            if(!lastNameMap.containsKey(p.getLastName())){
+                lastNameMap.put(p.getLastName(),new ArrayList<Person>());
+            }
+            lastNameMap.get(p.getLastName()).add(p);
+        }
+        return lastNameMap;
+    }
+
+    //    Generate a map of first names to the number of times they occur
+    public Map<String,Integer> getFirstNameMap(){
+        Map<String, Integer> firstNameMap = new HashMap<>();
+        for(Person p : repository.findAll()){
+            if(!firstNameMap.containsKey(p.getFirstName())){
+                firstNameMap.put(p.getFirstName(),1);
+            }
+            else{
+                firstNameMap.put(p.getFirstName(),firstNameMap.get(p.getFirstName()+1));
+            }
+        }
+        return firstNameMap;
+    }
 
 }
