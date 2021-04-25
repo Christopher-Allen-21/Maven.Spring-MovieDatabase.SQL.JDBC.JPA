@@ -84,6 +84,13 @@ SELECT * FROM MOVIES WHERE (rating='G' OR RATING='PG') AND runtime<100;
 SELECT AVG(runtime) FROM MOVIES WHERE imdbScore<7.5 ORDER BY genre;
 UPDATE MOVIES SET rating='R' WHERE title='Starship Troopers';
 SELECT id,rating FROM MOVIES WHERE genre='Horror' OR genre='Documentary';
+SELECT AVG(imdbScore), MAX(imdbScore), MIN(imdbScore) FROM MOVIES WHERE genre='Sci-Fi' HAVING COUNT(*) > 1;
+SELECT AVG(imdbScore), MAX(imdbScore), MIN(imdbScore) FROM MOVIES WHERE genre='Horror' HAVING COUNT(*) > 1;
+SELECT AVG(imdbScore), MAX(imdbScore), MIN(imdbScore) FROM MOVIES WHERE genre='Documentary' HAVING COUNT(*) > 1;
+SELECT AVG(imdbScore), MAX(imdbScore), MIN(imdbScore) FROM MOVIES WHERE genre='Comedy' HAVING COUNT(*) > 1;
+SELECT AVG(imdbScore), MAX(imdbScore), MIN(imdbScore) FROM MOVIES WHERE genre='Animation' HAVING COUNT(*) > 1;
+DELETE FROM MOVIES WHERE rating='R';
+
 
 DROP SEQUENCE hibernate_sequence;
 
