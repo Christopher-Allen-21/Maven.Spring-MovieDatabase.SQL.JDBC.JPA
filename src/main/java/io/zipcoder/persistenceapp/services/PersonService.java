@@ -5,15 +5,14 @@ import io.zipcoder.persistenceapp.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
-import sun.awt.PeerEvent;
 
-import javax.persistence.criteria.CriteriaBuilder;
+
 import java.util.*;
 
 @Service
 public class PersonService {
 
-    PersonRepository repository;
+    private PersonRepository repository;
 
     @Autowired
     public PersonService(PersonRepository repository){
@@ -26,20 +25,19 @@ public class PersonService {
     }
 
     //    Add a Person to the database
-    public Boolean add(Person person){
-        repository.save(person);
-        return true;
+    public Person add(Person person){
+        return repository.save(person);
     }
 
     //    Update an existing Person in the database
-    public Boolean update(@PathVariable Integer id, Person person){
+    public Person update(@PathVariable Integer id, Person person){
         Person temp = repository.findOne(id);
         temp.setFirstName(person.getFirstName());
         temp.setLastName(person.getLastName());
         temp.setMobile(person.getMobile());
         temp.setBirthday(person.getBirthday());
         temp.setHomeId(person.getHomeId());
-        return true;
+        return repository.save(temp);
     }
 
     //    Remove a person from the database
