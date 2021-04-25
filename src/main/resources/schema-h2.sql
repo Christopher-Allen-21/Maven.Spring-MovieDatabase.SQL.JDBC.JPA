@@ -65,7 +65,7 @@ CREATE TABLE MOVIES (
     title VARCHAR(255) NOT NULL,
     runtime INT NOT NULL,
     genre VARCHAR (50) NOT NULL,
-    imdbScore DECIMAL NOT NULL,
+    imdbScore FLOAT NOT NULL,
     rating VARCHAR (20)
 );
 
