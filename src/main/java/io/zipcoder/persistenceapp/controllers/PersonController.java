@@ -29,7 +29,7 @@ public class PersonController {
 
     //    POST /people -- create a person
     @PostMapping("/people")
-    public ResponseEntity<Person> createPerson(Person person) {
+    public ResponseEntity<Person> createPerson(@RequestBody Person person) {
         return new ResponseEntity<>(service.add(person), HttpStatus.CREATED);
     }
 
